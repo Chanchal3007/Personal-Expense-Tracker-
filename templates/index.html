@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <h1>Expense Tracker</h1>
+
+    <!-- Dashboard -->
+    <section class="summary" aria-label="Summary">
+      <div class="card">
+        <span class="label">Total income</span>
+        <span class="amount income" id="total-income">₹0</span>
+      </div>
+      <div class="card">
+        <span class="label">Total expenses</span>
+        <span class="amount expense" id="total-expense">₹0</span>
+      </div>
+      <div class="card">
+        <span class="label">Balance</span>
+        <span class="amount" id="balance">₹0</span>
+      </div>
+    </section>
+
+    <!-- Add transaction -->
+    <section class="panel">
+      <h2 id="form-title">Add transaction</h2>
+      <form id="transaction-form">
+        <div class="field">
+          <label for="type">Type</label>
+          <select id="type" required>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="amount">Amount (₹)</label>
+          <input type="number" id="amount" min="0.01" step="0.01" required>
+        </div>
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category" required></select>
+        </div>
+        <div class="field">
+          <label for="date">Date</label>
+          <input type="date" id="date" required>
+        </div>
+        <div class="field wide">
+          <label for="description">Description</label>
+          <input type="text" id="description" maxlength="100" placeholder="e.g. Groceries">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="primary" id="submit-btn">Add transaction</button>
+          <button type="button" class="secondary" id="cancel-btn" hidden>Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- History -->
+    <section class="panel">
+      <h2>Transaction history</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th class="right">Amount</th>
+              <th class="right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="transaction-list"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="empty-message" hidden>No transactions yet. Add your first one above.</p>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
